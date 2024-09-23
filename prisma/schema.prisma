@@ -1,0 +1,49 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL_TEST")
+}
+
+model Product {
+  ID          Int                       @id @default(autoincrement())
+  SKU         String                    @unique
+  title       String
+  price       Float
+  description String                    @db.Text()
+  brand       String
+  stock       Int
+  category    String
+  relations   SKU_PartNumber_Relation[]
+}
+
+model Provider {
+  ID_Provider Int                       @id @default(autoincrement())
+  name        String                    @unique
+  contact     String
+  direction   String                    @db.Text()
+  relations   SKU_PartNumber_Relation[]
+}
+
+model SKU_PartNumber_Relation {
+  ID           Int    @id @default(autoincrement())
+  SKU_Relation String
+  ID_Provider  Int
+
+  PartNumber String
+  price      Float
+  stock      Int
+
+  products  Product  @relation(fields: [SKU_Relation], references: [SKU])
+  providers Provider @relation(fields: [ID_Provider], references: [ID_Provider])
+
+  @@unique([SKU_Relation, ID_Provider, PartNumber])
+}
