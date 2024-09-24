@@ -228,4 +228,80 @@ describe("Relation Products Tests", () => {
 
     expect(response).toBeDefined();
   });
+
+  test("Create a new relation product with a product on multiple providers", async () => {
+    const productTest = await createProduct({
+      title: "Product Test Laptop",
+      price: 1000,
+      description: "Product Test Description",
+      stock: 10,
+      category: "Laptop",
+      brand: "ASUS",
+    });
+
+    const providerTest = await createProvider({
+      name: "Provider Test 01",
+      contact: "Contact Test 01",
+      direction: "Address Test 01",
+    });
+
+    const providerTest2 = await createProvider({
+      name: "Provider Test 02",
+      contact: "Contact Test 02",
+      direction: "Address Test 02",
+    });
+
+    const relationProduct: Prisma.SKU_PartNumber_RelationCreateInput = {
+      PartNumber: "ASUS-123",
+      price: 1000,
+      stock: 10,
+      products: {
+        connect: {
+          SKU: productTest.SKU,
+        },
+      },
+      providers: {
+        connect: {
+          ID_Provider: providerTest.ID_Provider,
+        },
+      },
+    };
+
+    const relationProduct2: Prisma.SKU_PartNumber_RelationCreateInput = {
+      PartNumber: "123-ASUS",
+      price: 999,
+      stock: 3,
+      products: {
+        connect: {
+          SKU: productTest.SKU,
+        },
+      },
+      providers: {
+        connect: {
+          ID_Provider: providerTest2.ID_Provider,
+        },
+      },
+    };
+
+    const response = await createRelationProduct(relationProduct);
+    const response2 = await createRelationProduct(relationProduct2);
+
+    expect(response.PartNumber).toBe(relationProduct.PartNumber);
+    expect(response.price).toBe(relationProduct.price);
+    expect(response.stock).toBe(relationProduct.stock);
+    expect(response.products).toBeDefined();
+    expect(response.providers).toBeDefined();
+
+    expect(response.products.SKU).toBe(productTest.SKU);
+    expect(response.providers.ID_Provider).toBe(providerTest.ID_Provider);
+
+    expect(response2.PartNumber).toBe(relationProduct2.PartNumber);
+    expect(response2.price).toBe(relationProduct2.price);
+    expect(response2.stock).toBe(relationProduct2.stock);
+    expect(response2.products).toBeDefined();
+    expect(response2.providers).toBeDefined();
+
+    expect(response2.products.SKU).toBe(productTest.SKU);
+    expect(response2.providers.ID_Provider).toBe(providerTest2.ID_Provider);
+  });
 });
