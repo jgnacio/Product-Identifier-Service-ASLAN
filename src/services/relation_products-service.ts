@@ -21,6 +21,10 @@ export const createRelationProduct = async (
         },
       },
     },
+    include: {
+      providers: true,
+      products: true,
+    },
   });
 
   return relation_product;
@@ -43,6 +47,7 @@ export const showRelationProductBySKU = async (SKU_Relation: string) => {
     },
     include: {
       providers: true,
+      products: true,
     },
   });
   return relation_product;
@@ -69,6 +74,10 @@ export const updateRelationProduct = async (
             ID_Provider: data.providers.connect?.ID_Provider,
           },
         },
+      },
+      include: {
+        providers: true,
+        products: true,
       },
     });
     return relation_product;

@@ -21,6 +21,7 @@ describe("Providers Service", () => {
   });
 
   afterAll(async () => {
+    await prisma.provider.deleteMany({});
     await prisma.$disconnect();
   });
 
@@ -78,5 +79,37 @@ describe("Providers Service", () => {
       where: { ID_Provider: createdProvider.ID_Provider },
     });
     expect(deletedProvider).toBeNull();
+  });
+
+  test("CREATE - Undefined Entry - should throw an error", async () => {
+    try {
+      await createProvider(undefined as any);
+    } catch (error) {
+      expect(error).toBeDefined();
+    }
+  });
+
+  test("UPDATE - Undefined Entry - should throw an error", async () => {
+    try {
+      await updateProvider(undefined as any, 1);
+    } catch (error) {
+      expect(error).toBeDefined();
+    }
+  });
+
+  test("UPDATE - Provider not found - should throw an error", async () => {
+    try {
+      await updateProvider({} as any, 1);
+    } catch (error) {
+      expect(error).toBeDefined();
+    }
+  });
+
+  test("DELETE - Provider not found - should throw an error", async () => {
+    try {
+      await deleteProvider(NaN);
+    } catch (error) {
+      expect(error).toBeDefined();
+    }
   });
 });

@@ -29,6 +29,10 @@ export const showProducts = async () => {
 };
 
 export const showProductById = async (id: number) => {
+  if (!id) {
+    throw new Error("ID is required");
+  }
+
   const product = await prisma.product.findUnique({
     where: {
       ID: id,
@@ -85,6 +89,20 @@ export const updateProduct = async (
 };
 
 export const deleteProduct = async (id: number) => {
+  if (!id) {
+    throw new Error("ID is required");
+  }
+
+  const productToDelete = await prisma.product.findUnique({
+    where: {
+      ID: id,
+    },
+  });
+
+  if (!productToDelete) {
+    return null;
+  }
+
   const product = await prisma.product.delete({
     where: {
       ID: id,

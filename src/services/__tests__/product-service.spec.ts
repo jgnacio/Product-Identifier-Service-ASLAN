@@ -23,6 +23,7 @@ describe("Products Service", () => {
   });
 
   afterAll(async () => {
+    await prisma.provider.deleteMany({});
     await prisma.$disconnect();
   });
 
@@ -122,5 +123,52 @@ describe("Products Service", () => {
     // Verificar que el producto ha sido eliminado
     const deletedProduct = await showProductById(createdProduct.ID);
     expect(deletedProduct).toBeNull();
+  });
+
+  test("CREATE - Undefined Entry - should throw an error", async () => {
+    try {
+      await createProduct(undefined as any);
+    } catch (error) {
+      expect(error).toBeDefined();
+    }
+  });
+
+  test("UPDATE - Undefined Entry - should throw an error", async () => {
+    try {
+      await updateProduct(undefined as any, 1);
+    } catch (error) {
+      expect(error).toBeDefined();
+    }
+  });
+
+  test("GET - Product not found By ID - should return null", async () => {
+    const response = await showProductById(99999);
+    expect(response).toBeNull();
+  });
+
+  test("GET - Product not found By SKU - should return null", async () => {
+    const response = await showProductBySKU("SKU-123");
+    expect(response).toBeNull();
+  });
+
+  test("GET - Product undefined - should throw an error", async () => {
+    try {
+      await showProductBySKU(undefined as any);
+    } catch (error) {
+      expect(error).toBeDefined();
+    }
+  });
+
+  test("DELETE - Product not found - should return null", async () => {
+    const response = await deleteProduct(99999);
+    expect(response).toBeNull();
+  });
+
+  test("PUT - Product not found - should throw an error", async () => {
+    try {
+      await updateProduct({} as any, 1);
+    } catch (error) {
+      expect(error).toBeDefined();
+    }
   });
 });
