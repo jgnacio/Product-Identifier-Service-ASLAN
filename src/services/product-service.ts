@@ -23,7 +23,11 @@ export const createProduct = async (data: requestCreateProduct) => {
 };
 
 export const showProducts = async () => {
-  const products = await prisma.product.findMany();
+  const products = await prisma.product.findMany({
+    include: {
+      relations: true,
+    },
+  });
 
   return products;
 };

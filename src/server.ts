@@ -4,8 +4,15 @@ const prisma = new PrismaClient();
 
 async function main() {
   let allRelations = await prisma.sKU_PartNumber_Relation.findMany();
-  let allProviders = await prisma.providers.findMany();
-  let allProducts = await prisma.products.findMany();
+  let allProviders = await prisma.provider.findMany();
+  let allProducts = await prisma.product.findMany();
+
+  // const newProvider = await createNewProvider(
+  //   "Unicom",
+  //   "2402 0000",
+  //   "Constitución 1618, 11800 Montevideo, Departamento de Montevideo"
+  // );
+  // console.log("New Provider:", newProvider);
 
   // console.log("All Relations:", allRelations);
   // console.log("All Providers:", allProviders);
@@ -42,16 +49,16 @@ async function main() {
   // console.log("All Products:", allProducts);
 
   // Buscar por SKU Interno
-  const sku = "LAP-ASUS-0001";
-  const product = await prisma.products.findFirst({ where: { SKU: sku } });
-  console.log(
-    "Busqueda de relaciones para el SKU:",
-    sku,
-    "Correspondiente al producto",
-    product?.title
-  );
-  const relations = await searchRelationsBySKU(sku);
-  console.log("Relations:", relations);
+  // const sku = "LAP-ASUS-0001";
+  // const product = await prisma.product.findFirst({ where: { SKU: sku } });
+  // console.log(
+  //   "Busqueda de relaciones para el SKU:",
+  //   sku,
+  //   "Correspondiente al producto",
+  //   product?.title
+  // );
+  // const relations = await searchRelationsBySKU(sku);
+  // console.log("Relations:", relations);
 }
 
 main()
@@ -71,7 +78,7 @@ async function createNewProduct(
   partNumber: string
 ) {
   const sku = await generateSKU(category, brand);
-  const newProduct = prisma.products.create({
+  const newProduct = prisma.product.create({
     data: {
       SKU: sku,
       title: "Asus Zenbook 14",
@@ -90,7 +97,7 @@ async function generateSKU(category: string, brand: string) {
   const brandCode = brand.slice(0, 4).toUpperCase();
 
   // Contamos los productos que existen ya en esta categoría y marca
-  const count = await prisma.products.count({
+  const count = await prisma.product.count({
     where: {
       category: category,
       brand: brand,
@@ -109,7 +116,7 @@ async function createNewProvider(
   contact: string,
   direction: string
 ) {
-  const newProvider = prisma.providers.create({
+  const newProvider = prisma.provider.create({
     data: {
       name: name,
       contact: contact,
