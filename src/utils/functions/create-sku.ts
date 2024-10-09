@@ -6,13 +6,8 @@ async function generateSKU(category: string, brand: string) {
   const categoryCode = category.slice(0, 3).toUpperCase();
   const brandCode = brand.slice(0, 4).toUpperCase();
 
-  // Contamos los productos que existen ya en esta categoría y marca
-  const count = await prisma.product.count({
-    where: {
-      category: category,
-      brand: brand,
-    },
-  });
+  // Obtener el Proxmio ID de producto en la base de datos
+  const count = await prisma.product.count();
 
   const sequence = (count + 1).toString(16).toUpperCase().padStart(4, "0");
 

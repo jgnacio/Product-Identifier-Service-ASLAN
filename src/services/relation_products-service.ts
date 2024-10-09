@@ -8,6 +8,7 @@ export const createRelationProduct = async (
   const relation_product = await prisma.sKU_PartNumber_Relation.create({
     data: {
       PartNumber: data.PartNumber,
+      sku_provider: data.sku_provider,
       price: data.price,
       stock: data.stock,
       products: {
@@ -34,6 +35,7 @@ export const showRelationProducts = async () => {
   const relation_products = await prisma.sKU_PartNumber_Relation.findMany({
     include: {
       providers: true,
+      products: true,
     },
   });
 

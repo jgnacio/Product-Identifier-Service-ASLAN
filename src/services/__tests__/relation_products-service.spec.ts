@@ -49,6 +49,7 @@ describe("Relation Products Tests", () => {
 
     const relationProduct: Prisma.SKU_PartNumber_RelationCreateInput = {
       PartNumber: "ASUS-123",
+      sku_provider: "ASUS-123-SKU",
       price: 1000,
       stock: 10,
       products: {
@@ -90,6 +91,7 @@ describe("Relation Products Tests", () => {
 
     const newRelationProduct: Prisma.SKU_PartNumber_RelationCreateInput = {
       PartNumber: "ASUS-123",
+      sku_provider: "ASUS-123-SKU",
       price: 1000,
       stock: 10,
       products: {
@@ -108,6 +110,7 @@ describe("Relation Products Tests", () => {
 
     const relationProductUpdate: Prisma.SKU_PartNumber_RelationCreateInput = {
       PartNumber: "ASUS-321",
+      sku_provider: "ASUS-123-SKU",
       price: 999,
       stock: 15,
       products: {
@@ -161,6 +164,7 @@ describe("Relation Products Tests", () => {
 
     const newRelationProduct: Prisma.SKU_PartNumber_RelationCreateInput = {
       PartNumber: "ASUS-123",
+      sku_provider: "ASUS-123-SKU",
       price: 1000,
       stock: 10,
       products: {
@@ -208,6 +212,7 @@ describe("Relation Products Tests", () => {
 
     const newRelationProduct: Prisma.SKU_PartNumber_RelationCreateInput = {
       PartNumber: "ASUS-123",
+      sku_provider: "ASUS-123-SKU",
       price: 1000,
       stock: 10,
       products: {
@@ -253,6 +258,7 @@ describe("Relation Products Tests", () => {
 
     const relationProduct: Prisma.SKU_PartNumber_RelationCreateInput = {
       PartNumber: "ASUS-123",
+      sku_provider: "ASUS-123-SKU",
       price: 1000,
       stock: 10,
       products: {
@@ -269,6 +275,7 @@ describe("Relation Products Tests", () => {
 
     const relationProduct2: Prisma.SKU_PartNumber_RelationCreateInput = {
       PartNumber: "123-ASUS",
+      sku_provider: "ASUS-123-SKU",
       price: 999,
       stock: 3,
       products: {

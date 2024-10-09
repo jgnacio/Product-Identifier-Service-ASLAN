@@ -11,7 +11,7 @@ import {
 export const create = async (req: Request, res: Response) => {
   const { PartNumber, price, stock } = req.body;
 
-  if (!PartNumber || !price || !stock) {
+  if (!PartNumber || !price || (!stock && stock != 0)) {
     return res.status(400).json({
       message: "Please provide all the required fields",
     });
@@ -19,6 +19,7 @@ export const create = async (req: Request, res: Response) => {
 
   const relation_product = await createRelationProduct({
     PartNumber: req.body.PartNumber,
+    sku_provider: req.body.sku_provider,
     price: req.body.price,
     stock: req.body.stock,
     products: {

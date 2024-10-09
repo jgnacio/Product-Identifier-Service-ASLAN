@@ -7,12 +7,12 @@ async function main() {
   let allProviders = await prisma.provider.findMany();
   let allProducts = await prisma.product.findMany();
 
-  // const newProvider = await createNewProvider(
-  //   "Unicom",
-  //   "2402 0000",
-  //   "Constitución 1618, 11800 Montevideo, Departamento de Montevideo"
-  // );
-  // console.log("New Provider:", newProvider);
+  const newProvider = await createNewProvider(
+    "Unicom",
+    "2402 0000",
+    "Constitución 1618, 11800 Montevideo, Departamento de Montevideo"
+  );
+  console.log("New Provider:", newProvider);
 
   // console.log("All Relations:", allRelations);
   // console.log("All Providers:", allProviders);

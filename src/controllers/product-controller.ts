@@ -12,7 +12,14 @@ import generateSKU from "../utils/functions/create-sku";
 export const create = async (req: Request, res: Response) => {
   const { title, price, description, stock, category, brand } = req.body;
 
-  if (!title || !price || !description || !stock || !category || !brand) {
+  if (
+    !title ||
+    !price ||
+    !description ||
+    (!stock && stock != 0) ||
+    !category ||
+    !brand
+  ) {
     return res.status(400).json({
       message: "Please provide all the required fields",
     });
