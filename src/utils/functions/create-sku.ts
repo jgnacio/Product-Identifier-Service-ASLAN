@@ -6,10 +6,18 @@ async function generateSKU(category: string, brand: string) {
   const categoryCode = category.slice(0, 3).toUpperCase();
   const brandCode = brand.slice(0, 4).toUpperCase();
 
-  // Obtener el Proxmio ID de producto en la base de datos
-  const count = await prisma.product.count();
+  // Obtener el ultimo producto creado
+  const lastProduct = await prisma.product.findFirst({
+    orderBy: {
+      ID: "desc",
+    },
+  });
 
-  const sequence = (count + 1).toString(16).toUpperCase().padStart(4, "0");
+  // Generar la secuencia
+  const sequence = (lastProduct?.ID || 0 + 1)
+    .toString(16)
+    .toUpperCase()
+    .padStart(4, "0");
 
   // Genera el SKU
   const sku = `${categoryCode}-${brandCode}-${sequence}`;
