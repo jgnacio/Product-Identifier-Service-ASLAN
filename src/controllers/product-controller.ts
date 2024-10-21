@@ -105,9 +105,9 @@ export const update = async (req: Request, res: Response) => {
 };
 
 export const remove = async (req: Request, res: Response) => {
-  const id = parseInt(req.params.id);
+  const sku = req.params.sku;
 
-  const product = await deleteProduct(id);
+  const product = await deleteProduct(sku);
 
   return res.status(201).json({
     message: "Success Delete Product",

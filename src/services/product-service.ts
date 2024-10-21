@@ -92,14 +92,14 @@ export const updateProduct = async (
   return product;
 };
 
-export const deleteProduct = async (id: number) => {
-  if (!id) {
-    throw new Error("ID is required");
+export const deleteProduct = async (sku: string) => {
+  if (!sku) {
+    throw new Error("SKU is required");
   }
 
   const productToDelete = await prisma.product.findUnique({
     where: {
-      ID: id,
+      SKU: sku,
     },
   });
 
@@ -109,7 +109,7 @@ export const deleteProduct = async (id: number) => {
 
   const product = await prisma.product.delete({
     where: {
-      ID: id,
+      SKU: sku,
     },
   });
 

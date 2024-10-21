@@ -3,20 +3,26 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 async function main() {
-  let allRelations = await prisma.sKU_PartNumber_Relation.findMany();
-  let allProviders = await prisma.provider.findMany();
-  let allProducts = await prisma.product.findMany();
+  // let allRelations = await prisma.sKU_PartNumber_Relation.findMany();
+  // let allProviders = await prisma.provider.findMany();
+  // let allProducts = await prisma.product.findMany();
 
-  // const newProvider = await createNewProvider(
-  //   "Unicom",
-  //   "2402 0000",
-  //   "Constitución 1618, 11800 Montevideo, Departamento de Montevideo"
-  // );
-  // console.log("New Provider:", newProvider);
+  const newProvider = await createNewProvider(
+    "Unicom",
+    "2402 0000",
+    "Constitución 1618, 11800 Montevideo, Departamento de Montevideo"
+  );
+  const newProvider2 = await createNewProvider(
+    "PC Service",
+    "2400 4449",
+    "Piedra Alta 1628, Entre Cerro Largo y Paysandú, 11200 Montevideo, Departamento de Montevideo"
+  );
+  console.log("New Provider:", newProvider);
+  console.log("New Provider:", newProvider2);
 
-  console.log("All Relations:", allRelations);
-  console.log("All Providers:", allProviders);
-  console.log("All Products:", allProducts);
+  // console.log("All Relations:", allRelations);
+  // console.log("All Providers:", allProviders);
+  // console.log("All Products:", allProducts);
 
   // // obtengo el proveedor con el nombre "Unicom"
   // const provider = await prisma.provider.findFirst({});

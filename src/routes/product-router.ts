@@ -15,6 +15,6 @@ router.get("/products", show);
 router.get("/products/:id", showById);
 router.get("/products/sku/:sku", showBySKU);
 router.put("/products/:id", update);
-router.delete("/products/:id", remove);
+router.delete("/products/:sku", remove);
 
 export default router;

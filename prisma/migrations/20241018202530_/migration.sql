@@ -34,7 +34,6 @@ CREATE TABLE `SKU_PartNumber_Relation` (
     `price` DOUBLE NOT NULL,
     `stock` INTEGER NOT NULL,
 
-    UNIQUE INDEX `SKU_PartNumber_Relation_SKU_Relation_ID_Provider_PartNumber_key`(`SKU_Relation`, `ID_Provider`, `PartNumber`),
     PRIMARY KEY (`ID`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
