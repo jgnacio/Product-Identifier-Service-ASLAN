@@ -17,8 +17,14 @@ async function main() {
     "2400 4449",
     "Piedra Alta 1628, Entre Cerro Largo y Paysandú, 11200 Montevideo, Departamento de Montevideo"
   );
+  const newProviderSolution = await createNewProvider(
+    "Solutionbox",
+    "2900 0111",
+    "Galicia 780, 11100 Montevideo, Departamento de Montevideo"
+  );
   console.log("New Provider:", newProvider);
   console.log("New Provider:", newProvider2);
+  console.log("New Provider:", newProviderSolution);
 
   // console.log("All Relations:", allRelations);
   // console.log("All Providers:", allProviders);
