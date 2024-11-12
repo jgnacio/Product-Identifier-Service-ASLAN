@@ -13,7 +13,7 @@ async function main() {
     "Constitución 1618, 11800 Montevideo, Departamento de Montevideo"
   );
   const newProvider2 = await createNewProvider(
-    "PC Service",
+    "PCService",
     "2400 4449",
     "Piedra Alta 1628, Entre Cerro Largo y Paysandú, 11200 Montevideo, Departamento de Montevideo"
   );
