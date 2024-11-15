@@ -95,3 +95,23 @@ export const deleteRelationProduct = async (id: number) => {
 
   return relation_product;
 };
+
+export const deleteRelationProductBySKU = async (SKU_Relation: string) => {
+  const findFirst = await prisma.sKU_PartNumber_Relation.findFirst({
+    where: {
+      SKU_Relation: SKU_Relation,
+    },
+  });
+
+  if (!findFirst) {
+    throw new Error("Data not found");
+  }
+
+  const relation_product = await prisma.sKU_PartNumber_Relation.delete({
+    where: {
+      ID: findFirst.ID,
+    },
+  });
+
+  return relation_product;
+};

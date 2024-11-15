@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 import {
   createRelationProduct,
   deleteRelationProduct,
+  deleteRelationProductBySKU,
   showRelationProductBySKU,
   showRelationProducts,
   updateRelationProduct,
@@ -89,6 +90,17 @@ export const update = async (req: Request, res: Response) => {
 export const remove = async (req: Request, res: Response) => {
   const id = parseInt(req.params.id);
   const relation_product = await deleteRelationProduct(id);
+
+  return res.status(201).json({
+    message: "Succes Delete Relation Product",
+    data: relation_product,
+  });
+};
+
+export const removeBySKU = async (req: Request, res: Response) => {
+  const SKU_Relation = req.params.SKU_Relation;
+  console.log(SKU_Relation);
+  const relation_product = await deleteRelationProductBySKU(SKU_Relation);
 
   return res.status(201).json({
     message: "Succes Delete Relation Product",
