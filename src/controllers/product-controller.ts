@@ -1,13 +1,12 @@
 import { Request, Response } from "express";
 import {
   createProduct,
-  showProducts,
-  updateProduct,
   deleteProduct,
   showProductById,
   showProductBySKU,
+  showProducts,
+  updateProduct,
 } from "../services/product-service";
-import generateSKU from "../utils/functions/create-sku";
 
 export const create = async (req: Request, res: Response) => {
   const { title, price, description, stock, category, brand } = req.body;
