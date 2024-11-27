@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 import {
   createProvider,
   deleteProvider,
+  showProviderByID,
   showProviders,
   updateProvider,
 } from "../services/provider-service";
@@ -34,6 +35,21 @@ export const show = async (req: Request, res: Response) => {
   return res.status(201).json({
     message: "List Data Provider",
     data: providers,
+  });
+};
+
+export const showById = async (req: Request, res: Response) => {
+  const id = parseInt(req.params.id);
+  if (!id) {
+    return res.status(400).json({
+      message: "Please provide all the required fields",
+    });
+  }
+  const provider = await showProviderByID(id);
+
+  return res.status(201).json({
+    message: "List Data Provider",
+    data: provider,
   });
 };
 

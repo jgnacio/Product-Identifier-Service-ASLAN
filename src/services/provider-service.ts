@@ -20,6 +20,14 @@ export const showProviders = async () => {
   return providers;
 };
 
+export const showProviderByID = async (id: number) => {
+  const provider = await prisma.provider.findUnique({
+    where: { ID_Provider: id },
+  });
+
+  return provider;
+};
+
 export const updateProvider = async (
   data: Prisma.ProviderUpdateInput,
   id: number
